@@ -2,8 +2,10 @@ const BG_COLOUR = '#231f20';
 const SNAKE_COLOUR = '#c2c2c2';
 const FOOD_COLOUR = '#e66916';
 
-const socket = io('https://quiet-sea-74691.herokuapp.com/');
-//const socket = io('http://localhost:8080/');
+//const socket = io('https://quiet-sea-74691.herokuapp.com/');
+
+
+const socket = io('https://quiet-sea-74691.herokuapp.com/', {transports: ['polling']});
 
 socket.on('init', handleInit);
 socket.on('gameState', handleGameState);
