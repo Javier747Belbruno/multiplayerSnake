@@ -1,16 +1,39 @@
 const io = require('socket.io')();
 const { initGame, gameLoop, getUpdatedVelocity } = require('./game');
 const { FRAME_RATE } = require('./constants');
-const { makeid } = require('./utils');
 
 const state = {};
 const clientRooms = {};
+
+
 
 io.on('connection', client => {
 
   client.on('keydown', handleKeydown);
   client.on('newGame', handleNewGame);
+  client.on('searchGame', handleSearchGame);
   client.on('joinGame', handleJoinGame);
+
+
+  function handleSearchGame() {
+    const rooms = io.sockets.adapter.rooms;
+
+    var listRoomsAvailables = []; 
+    
+    for (var room in rooms){
+               
+        var roomData = io.sockets.adapter.rooms[room];
+        var clientsAvailables = roomData.length;
+        //console.log(clientes);
+
+        if(room.toString().length < 18  && clientsAvailables == '1'){
+          //console.log("Name: " + room );
+          listRoomsAvailables.push({ room: room.toString() });
+        } 
+      }
+    
+    client.emit('playersList', listRoomsAvailables);
+  }
 
   function handleJoinGame(roomName) {
     const room = io.sockets.adapter.rooms[roomName];
@@ -42,8 +65,8 @@ io.on('connection', client => {
     startGameInterval(roomName);
   }
 
-  function handleNewGame() {
-    let roomName = makeid(2);
+  function handleNewGame(roomName) {
+
     clientRooms[client.id] = roomName;
     client.emit('gameCode', roomName);
 
@@ -85,7 +108,7 @@ function startGameInterval(roomName) {
       state[roomName] = null;
       clearInterval(intervalId);
     }
-  }, 1000 / FRAME_RATE);
+  }, 3000 / FRAME_RATE);
 }
 
 function emitGameState(room, gameState) {

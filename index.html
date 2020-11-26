@@ -17,7 +17,13 @@
 
       <div id="initialScreen" class="h-100">
         <div class="d-flex flex-column align-items-center justify-content-center h-100">
-            <h1>Multiplayer Snake</h1>
+            <h1>Multiplayer Snake v1.1</h1>
+            </br>
+            <div class="form-group">
+              <input type="text" placeholder="Enter Name Room" maxlength="18" id="gameCodeInput"/>
+            </div>
+
+
             <button
               type="submit"
               class="btn btn-success"
@@ -25,24 +31,37 @@
             >
               Create New Game
             </button>
+
+            
             <div>OR</div>
-            <div class="form-group">
-              <input type="text" placeholder="Enter Game Code" id="gameCodeInput"/>
-            </div>
+            
+            </br>
             <button
               type="submit"
               class="btn btn-success"
-              id="joinGameButton"
+              id="searchGameButton"
             >
-              Join Game
+              Search a Game
             </button>
-        </div>
+            </br>
+            <h3>Made by HungryTurtleCode</h3>
+            <h3>Modified by Javier747belbruno</h3>
+        </br>
+
+      <div >
+      <table id="roomsAvailables" class="table table-borderless table-striped table-earning">
+        
+      </table>
       </div>
 
+    </div>
+         
+      </div>
+     
       <div id="gameScreen" class="h-100">
         <div class="d-flex flex-column align-items-center justify-content-center h-100">
 
-          <h1>Your game code is: <span id="gameCodeDisplay"></span></h1>
+          <h1>Room: <span id="gameCodeDisplay"></span></h1>
 
           <canvas id="canvas"></canvas>
         </div>
@@ -50,7 +69,6 @@
 
     </div>
   </section>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
   <script src="index.js"></script>
 </body>
