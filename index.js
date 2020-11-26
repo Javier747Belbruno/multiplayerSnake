@@ -6,7 +6,7 @@ const FOOD_COLOUR = '#e66916';
 //const socket = io('https://quiet-sea-74691.herokuapp.com/', {transports: ['polling']});
 
 
-const socket = io('https://quiet-sea-74691.herokuapp.com',{transports: ['polling']});
+const socket = io('https://quiet-sea-74691.herokuapp.com',{origins: '*:*'});
 
 
 
